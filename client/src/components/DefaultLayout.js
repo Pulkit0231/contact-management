@@ -9,7 +9,7 @@ function DefaultLayout(props) {
           <Col lg={22} sm={24} xs={24}>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
               <div class="container-fluid">
-                <a class="navbar-brand" href="/">Car Management</a>
+                <a class="navbar-brand" href="/">Contact Management</a>
                 <div class="d-flex" >
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">

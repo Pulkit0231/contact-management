@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DefaultLayout from '../components/DefaultLayout';
-import { getAllCars } from '../redux/actions/carsActions';
+import { getAllContacts } from '../redux/actions/contactsActions';
 import { Col, Row } from 'antd';
-import { Link } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 
 function Home() {
-    const { cars } = useSelector((state) => state.carsReducer);
+    const { contacts } = useSelector((state) => state.contactsReducer);
     const { loading } = useSelector((state) => state.alertsReducer);
-    const [totalCars, setTotalCars] = useState([]);
+    const [totalContacts, setTotalContacts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllCars());
+        dispatch(getAllContacts());
     }, [dispatch]);
 
     useEffect(() => {
-        setTotalCars(cars);
-    }, [cars]);
+        setTotalContacts(contacts);
+    }, [contacts]);
 
-    const filteredCars = totalCars.filter(
-        (car) =>
-            car &&
-            ((car.title && car.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                ((car.tags && car.tags.toLowerCase().includes(searchQuery.toLowerCase()))) ||
-                (car.description && car.description.toLowerCase().includes(searchQuery.toLowerCase())))
+    const filteredContacts = totalContacts.filter(
+        (contact) =>
+            contact &&
+            ((contact.name && contact.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                ((contact.email && contact.email.toLowerCase().includes(searchQuery.toLowerCase()))) ||
+                (contact.number && contact.number.toLowerCase().includes(searchQuery.toLowerCase())))
     );
 
     return (
@@ -36,7 +35,7 @@ function Home() {
             <div className="search-container" style={{ textAlign: 'center', margin: '20px 0' }}>
                 <input
                     type="text"
-                    placeholder="Search cars"
+                    placeholder="Search contacts"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="form-control"
@@ -45,20 +44,15 @@ function Home() {
             </div>
 
             <Row justify="center" gutter={16}>
-                {filteredCars.map((car) => (
-                    <Col lg={5} sm={24} xs={24} key={car._id}>
-                        <div className="car p-4 bs1">
-                            <img src={car.image} className="carimg" alt={car.title} />
-                            <div className="car-content d-flex align-items-center justify-content-between">
-                                <div className="text-left pl-2">
-                                    <p><b>Tag</b>: {car.tags}</p>
-                                    <p><b>Title</b>: {car.title}</p>
-                                    <p><b>Description</b>: {car.description} /-</p>
-                                </div>
-                                <div>
-                                    <button className="btn1 mr-2">
-                                        <Link to={`/car/${car._id}`}>Book Now</Link>
-                                    </button>
+                {filteredContacts.map((contact) => (
+                    <Col lg={5} sm={24} xs={24} key={contact._id}>
+                        <div className="contact p-4 bs1">
+                            <h1>Contact Details</h1>
+                            <div className="contact-content d-flex ">
+                                <div className="text-start pl-2">
+                                    <p><b>Name</b>: {contact.name}</p>
+                                    <p><b>Email</b>: {contact.email}</p>
+                                    <p><b>Mobile Number</b>: {contact.number} </p>
                                 </div>
                             </div>
                         </div>

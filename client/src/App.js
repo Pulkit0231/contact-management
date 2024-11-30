@@ -7,9 +7,9 @@ import {
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import AddCar from './pages/AddCar';
+import AddContact from './pages/AddContact';
 import AdminHome from './pages/AdminHome';
-import EditCar from './pages/EditCar';
+import EditContact from './pages/EditContact';
 
 export const ProtectedRoute = ({ children }) => {
 
@@ -30,13 +30,13 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />
   }, {
-    path: "addcar",
-    element: <ProtectedRoute><AddCar /></ProtectedRoute>
+    path: "addcontact",
+    element: <ProtectedRoute><AddContact /></ProtectedRoute>
   }, {
-    path: "editcar/:carid",
-    element: <ProtectedRoute><EditCar /></ProtectedRoute>,
+    path: "editcontact/:contactid",
+    element: <ProtectedRoute><EditContact /></ProtectedRoute>,
     loader: ({ params }) => {
-      return params.carid;
+      return params.contactid;
     }
   }, {
     path: "admin",
@@ -55,10 +55,10 @@ function App() {
              <ProtectedRoute path='/' exact component={Home} />
              <Route path='/login' exact component={Login} />
              <Route path='/register' exact component={Register} />
-             <ProtectedRoute path='/booking/:carid' exact component={BookingCar} />
+             <ProtectedRoute path='/booking/:contactid' exact component={BookingContact} />
              <ProtectedRoute path='/userbookings' exact component={UserBookings} />
-             <ProtectedRoute path='/addcar' exact component={AddCar} />
-             <ProtectedRoute path='/editcar/:carid' exact component={EditCar} />
+             <ProtectedRoute path='/addcontact' exact component={AddContact} />
+             <ProtectedRoute path='/editcontact/:contactid' exact component={EditContact} />
              <ProtectedRoute path='/admin' exact component={AdminHome} />
          
          </BrowserRouter> */}

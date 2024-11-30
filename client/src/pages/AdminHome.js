@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
-import { deleteCar, getAllCars } from "../redux/actions/carsActions";
+import { deleteContact, getAllContacts } from "../redux/actions/contactsActions";
 import { Col, Row } from "antd";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
@@ -9,26 +9,26 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Popconfirm } from "antd";
 
 function AdminHome() {
-    const { cars } = useSelector((state) => state.carsReducer);
+    const { contacts } = useSelector((state) => state.contactsReducer);
     const { loading } = useSelector((state) => state.alertsReducer);
-    const [totalCars, setTotalCars] = useState([]);
+    const [totalContacts, setTotalContacts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllCars());
+        dispatch(getAllContacts());
     }, [dispatch]);
 
     useEffect(() => {
-        setTotalCars(cars);
-    }, [cars]);
+        setTotalContacts(contacts);
+    }, [contacts]);
 
-    const filteredCars = totalCars.filter(
-        (car) =>
-            car &&
-            ((car.title && car.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                ((car.tags && car.tags.toLowerCase().includes(searchQuery.toLowerCase()))) ||
-                (car.description && car.description.toLowerCase().includes(searchQuery.toLowerCase())))
+    const filteredContacts = totalContacts.filter(
+        (contact) =>
+            contact &&
+            ((contact.name && contact.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                ((contact.email && contact.email.toLowerCase().includes(searchQuery.toLowerCase()))) ||
+                (contact.number && contact.number.toLowerCase().includes(searchQuery.toLowerCase())))
     );
 
 
@@ -42,7 +42,7 @@ function AdminHome() {
                         <div className="search-container" style={{ textAlign: 'center', margin: '20px 0' }}>
                             <input
                                 type="text"
-                                placeholder="Search cars"
+                                placeholder="Search contacts"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="form-control"
@@ -50,7 +50,7 @@ function AdminHome() {
                             />
                         </div>
                         <button className="btn1">
-                            <a href="/addcar">ADD CAR</a>
+                            <a href="/addcontact">ADD CONTACT</a>
                         </button>
                     </div>
                 </Col>
@@ -61,30 +61,30 @@ function AdminHome() {
             {loading && <Spinner />}
 
             <Row justify="center" gutter={16}>
-                {filteredCars.map((car) => (
-                    <Col lg={6} sm={24} xs={24} key={car._id}>
-                        <div className="car p-4 bs1">
-                            <img src={car.image} className="carimg" alt={car.name} />
-                            <div className="car-content d-flex align-items-center justify-content-between">
-                                <div className="text-left pl-2">
-                                    <p><b>Tag</b>: {car.tags}</p>
-                                    <p><b>Title</b>: {car.title}</p>
-                                    <p><b>Description</b>: {car.description} /-</p>
+                {filteredContacts.map((contact) => (
+                    <Col lg={6} sm={24} xs={24} key={contact._id}>
+                        <div className="contact p-4 bs1">
+                            <div className="contact-content d-flex align-items-center justify-content-between">
+                                <div className="text-start pl-2">
+                                    <p><b>Name</b>: {contact.name}</p>
+                                    <p><b>Email</b>: {contact.email}</p>
+                                    <p><b>Mobile Number</b>: {contact.number} /-</p>
                                 </div>
-                                <div className="mr-4">
-                                    <Link to={`/editcar/${car._id}`}>
+                                <div className=" d-flex flex-column mb-3">
+                                    <Link to={`/editcontact/${contact._id}`}>
                                         <EditOutlined
-                                            className="mr-3"
+                                            className="px-2 "
                                             style={{ color: "green", cursor: "pointer" }}
                                         />
                                     </Link>
                                     <Popconfirm
-                                        title="Are you sure to delete this car?"
-                                        onConfirm={() => dispatch(deleteCar({ carid: car._id }))}
+                                        name="Are you sure to delete this contact?"
+                                        onConfirm={() => dispatch(deleteContact({ contactid: contact._id }))}
                                         okText="Yes"
                                         cancelText="No"
                                     >
                                         <DeleteOutlined
+                                            className="px-2 mt-4"
                                             style={{ color: "red", cursor: "pointer" }}
                                         />
                                     </Popconfirm>
