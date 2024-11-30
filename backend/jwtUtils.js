@@ -6,7 +6,7 @@ const secretKey = process.env.SECRETKEY; // Store in environment variable in pro
 
 // Generate a token
 const generateToken = (user) => {
-    return jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
+    return jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '4h' });
 };
 
 // Verify a token

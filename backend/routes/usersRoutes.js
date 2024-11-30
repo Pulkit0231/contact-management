@@ -15,7 +15,7 @@ router.post("/login", async (req, res) => {
         const user = await User.findOne({ username });
         if (user && await bcrypt.compare(password, user.password)) {
             // Generate JWT
-            const token = jwt.sign({ id: user._id, username: user.username }, secretKey, { expiresIn: "1h" });
+            const token = jwt.sign({ id: user._id, username: user.username }, secretKey, { expiresIn: "4h" });
             res.json({ token, message: "Login successful" });
         } else {
             return res.status(400).json({ message: "Invalid username or password" });
