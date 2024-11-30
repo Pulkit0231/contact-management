@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
 import { deleteContact, getAllContacts } from "../redux/actions/contactsActions";
-import { Button, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -48,9 +48,9 @@ function AdminHome() {
                                 style={{ maxWidth: '300px', margin: '0 auto' }}
                             />
                         </div>
-                        <Button className="btn1">
+                        <button className="btn1">
                             <a href="/addcontact">ADD CONTACT</a>
-                        </Button>
+                        </button>
                     </div>
                 </Col>
             </Row>
