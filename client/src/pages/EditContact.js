@@ -49,30 +49,37 @@ function EditContact() {
                             <h3>Edit Contact</h3>
 
                             <hr />
+
                             <Form.Item
                                 name="name"
                                 label="Name"
-                                rules={[{ required: true }]}
+                                rules={[{ required: true, message: 'Please enter a name!' }]}
                             >
-                                <Input />
+                                <Input placeholder="Enter contact name" />
                             </Form.Item>
                             <Form.Item
                                 name="number"
                                 label="Mobile number"
-                                rules={[{ required: true }]}
+                                rules={[
+                                    { required: true, message: 'Please enter a number!' },
+                                    { pattern: /^[0-9]+$/, message: 'Only numeric values allowed!' },
+                                ]}
                             >
-                                <Input />
+                                <Input placeholder="Enter mobile number" />
                             </Form.Item>
                             <Form.Item
                                 name="email"
                                 label="Email"
-                                rules={[{ required: true }]}
+                                rules={[
+                                    { required: true, message: 'Please enter an email!' },
+                                    { type: 'email', message: 'Please enter a valid email!' },
+                                ]}
                             >
-                                <Input />
+                                <Input placeholder="Enter email address" />
                             </Form.Item>
 
                             <div className="text-right">
-                                <button className="btn1">Edit Contact</button>
+                                <button type="primary" htmlType="submit" className="btn1">Edit Contact</button>
                             </div>
                         </Form>
                     )}

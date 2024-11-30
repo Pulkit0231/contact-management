@@ -59,7 +59,7 @@ export const addContact = (reqObj) => async (dispatch) => {
 export const editContact = (reqObj) => async (dispatch) => {
     dispatch({ type: 'LOADING', payload: true });
     try {
-        await axiosInstance.post(`/editcontact/${reqObj.id}`, reqObj); // Use PUT for updates
+        await axiosInstance.put(`/editcontact`, reqObj); // Use PUT for updates
 
         dispatch({ type: 'LOADING', payload: false });
 
