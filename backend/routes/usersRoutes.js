@@ -40,18 +40,6 @@ router.post("/register", async (req, res) => {
     }
 });
 
-// Protected Profile Route
-router.get("/profile", authenticateToken, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        res.json({ username: user.username });
-    } catch (error) {
-        return res.status(400).json({ message: "An error occurred", error });
-    }
-});
 
 
 module.exports = router;

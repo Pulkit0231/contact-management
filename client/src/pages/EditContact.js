@@ -1,4 +1,4 @@
-import { Col, Row, Form, Input } from "antd";
+import { Col, Row, Form, Input, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
@@ -79,7 +79,7 @@ function EditContact() {
                             </Form.Item>
 
                             <div className="text-right">
-                                <button type="primary" htmlType="submit" className="btn1">Edit Contact</button>
+                                <Button className="btn1">Edit Contact</Button>
                             </div>
                         </Form>
                     )}

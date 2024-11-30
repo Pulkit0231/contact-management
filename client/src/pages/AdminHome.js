@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
 import { deleteContact, getAllContacts } from "../redux/actions/contactsActions";
-import { Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -27,8 +27,7 @@ function AdminHome() {
         (contact) =>
             contact &&
             ((contact.name && contact.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                ((contact.email && contact.email.toLowerCase().includes(searchQuery.toLowerCase()))) ||
-                (contact.number && contact.number.toLowerCase().includes(searchQuery.toLowerCase())))
+                ((contact.email && contact.email.toLowerCase().includes(searchQuery.toLowerCase()))))
     );
 
 
@@ -49,9 +48,9 @@ function AdminHome() {
                                 style={{ maxWidth: '300px', margin: '0 auto' }}
                             />
                         </div>
-                        <button className="btn1">
+                        <Button className="btn1">
                             <a href="/addcontact">ADD CONTACT</a>
-                        </button>
+                        </Button>
                     </div>
                 </Col>
             </Row>
@@ -68,7 +67,7 @@ function AdminHome() {
                                 <div className="text-start pl-2">
                                     <p><b>Name</b>: {contact.name}</p>
                                     <p><b>Email</b>: {contact.email}</p>
-                                    <p><b>Mobile Number</b>: {contact.number} /-</p>
+                                    <p><b>Mobile Number</b>: {contact.number} </p>
                                 </div>
                                 <div className=" d-flex flex-column mb-3">
                                     <Link to={`/editcontact/${contact._id}`}>
@@ -79,7 +78,7 @@ function AdminHome() {
                                     </Link>
                                     <Popconfirm
                                         name="Are you sure to delete this contact?"
-                                        onConfirm={() => dispatch(deleteContact({ contactid: contact._id }))}
+                                        onConfirm={() => dispatch(deleteContact(contact._id))}
                                         okText="Yes"
                                         cancelText="No"
                                     >

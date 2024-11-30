@@ -61,8 +61,6 @@ export const editContact = (reqObj) => async (dispatch) => {
     try {
         await axiosInstance.put(`/editcontact`, reqObj); // Use PUT for updates
 
-        dispatch({ type: 'LOADING', payload: false });
-
         message.success('Contact details updated successfully');
         setTimeout(() => {
             window.location.href = '/admin';
@@ -71,16 +69,25 @@ export const editContact = (reqObj) => async (dispatch) => {
         console.error(error);
         message.error(error.response?.data?.message || 'Failed to update contact');
     }
+    finally {
+        dispatch({ type: 'LOADING', payload: false });
+    }
 };
 
 // Delete Contact
 export const deleteContact = (contactId) => async (dispatch) => {
+
     dispatch({ type: 'LOADING', payload: true });
     try {
+        // Pass contactId directly in the URL, as your API expects it in the route parameter
+        console.log(contactId)
         await axiosInstance.delete(`/deletecontact/${contactId}`);
+
         message.success('Contact deleted successfully');
+
+        // Optional: Use React Router for navigation if applicable
         setTimeout(() => {
-            window.location.reload();
+            window.location.reload(); // Consider a state-based rerender instead
         }, 200);
     } catch (error) {
         console.error(error);
@@ -89,3 +96,4 @@ export const deleteContact = (contactId) => async (dispatch) => {
         dispatch({ type: 'LOADING', payload: false });
     }
 };
+
