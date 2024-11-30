@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(cors(
     {
         orgin: ["https://dwada.vercil.app"],
-        methods: ["POST", "GET"],
+        methods: ["POST", "GET", 'PUT', 'DELETE'],
         credentials: true
     }
 ));
